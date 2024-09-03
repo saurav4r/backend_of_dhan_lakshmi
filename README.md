@@ -5,16 +5,7 @@ Here's a README for your Express.js and MongoDB project:
 
 This is a RESTful API built with Express.js and MongoDB for a compound interest calculator application. The API supports user registration, login with JWT authentication, and storing calculation data.
 
-## Table of Contents
 
-- [Description](#description)
-- [Technologies Used](#technologies-used)
-- [Installation](#installation)
-- [API Endpoints](#api-endpoints)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
-- [Acknowledgements](#acknowledgements)
 
 ## Description
 
@@ -117,7 +108,7 @@ Save compound interest calculation data (Protected route).
   - `200 OK`: Data saved successfully
   - `400 Bad Request`: Data not saved
 
-## Usage
+
 
 1. **Register**: Use the `/register` endpoint to create a new user account.
 2. **Login**: Use the `/login` endpoint to authenticate and get a JWT token.
