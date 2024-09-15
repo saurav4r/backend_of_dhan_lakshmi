@@ -28,7 +28,18 @@ const dataSchema=new mongoose.Schema({
 const USERS = mongoose.model('USERS', userSchema);
 const DATA=mongoose.model('DATA',dataSchema);
 
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, dbName: "dhan-lakshmi" });
+mongoose.connect(process.env.MONGODB_URI, { 
+  useNewUrlParser: true, 
+  useUnifiedTopology: true, 
+  dbName: "dhan-lakshmi",
+  serverSelectionTimeoutMS: 5000
+}).catch(err => console.log('Error connecting to MongoDB:', err));
+
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once('open', function() {
+  console.log('Connected to MongoDB successfully');
+});
 
 function verifyToken(req, res, next) {
   const authHeader = req.headers.authorization;
