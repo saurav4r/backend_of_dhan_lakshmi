@@ -5,7 +5,12 @@ const jwt = require('jsonwebtoken');
 const app = express();
 const port = process.env.PORT || 3003;
 
-app.use(cors());
+const corsOptions = {
+  origin: 'https://dhan-lakshmi-3ql3x6dsz-sauravs-projects-e1caf8bf.vercel.app',
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 const secretKey = "your-secret-key"; // Secret key for JWT token
