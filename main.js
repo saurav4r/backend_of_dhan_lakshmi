@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const app = express();
-const port = 3003;
+const port = process.env.PORT || 3003;
 
 app.use(cors());
 app.use(express.json());
@@ -28,8 +28,7 @@ const dataSchema=new mongoose.Schema({
 const USERS = mongoose.model('USERS', userSchema);
 const DATA=mongoose.model('DATA',dataSchema);
 
-mongoose.connect('mongodb+srv://saurav4ryou707997:185033UM@cluster0.bmftqgr.mongodb.net/', { useNewUrlParser: true, useUnifiedTopology: true, dbName: "dhan-lakshmi" });
-
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, dbName: "dhan-lakshmi" });
 
 function verifyToken(req, res, next) {
   const authHeader = req.headers.authorization;
