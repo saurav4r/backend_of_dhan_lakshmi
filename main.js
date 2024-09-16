@@ -49,6 +49,10 @@ db.once('open', function() {
   console.log('Connected to MongoDB successfully');
 });
 
+app.get('/ping', (req, res) => {
+  res.send('pong')
+})
+
 function verifyToken(req, res, next) {
   const authHeader = req.headers.authorization;
   if (authHeader) {
