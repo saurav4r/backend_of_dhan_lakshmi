@@ -6,7 +6,7 @@ const app = express();
 const port = process.env.PORT || 3003;
 
 const corsOptions = {
-  origin: ['https://dhan-lakshmi.vercel.app/', 'http://localhost:3000'],
+  origin: ['https://dhan-lakshmi.vercel.app', 'http://localhost:3000'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
