@@ -5,12 +5,13 @@ const jwt = require('jsonwebtoken');
 const app = express();
 const port = process.env.PORT || 3003;
 
-   const corsOptions = {
-     origin: ['https://dhan-lakshmi-3ql3x6dsz-sauravs-projects-e1caf8bf.vercel.app', 'http://localhost:3000'],
-     optionsSuccessStatus: 200,
-     credentials: true
-   };
-
+const corsOptions = {
+  origin: ['https://dhan-lakshmi-3ql3x6dsz-sauravs-projects-e1caf8bf.vercel.app', 'http://localhost:3000'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+  optionsSuccessStatus: 200
+};
 
 app.use(cors(corsOptions));
 app.use(express.json());
