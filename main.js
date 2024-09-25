@@ -3,9 +3,17 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const app = express();
-const port = 3003;
+const port = process.env.PORT || 3003;
 
-app.use(cors());
+const corsOptions = {
+  origin: ['https://dhan-lakshmi.vercel.app', 'http://localhost:3000'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 const secretKey = "your-secret-key"; 
@@ -28,8 +36,22 @@ const dataSchema=new mongoose.Schema({
 const USERS = mongoose.model('USERS', userSchema);
 const DATA=mongoose.model('DATA',dataSchema);
 
-mongoose.connect('mongodb+srv://saurav4ryou707997:185033UM@cluster0.bmftqgr.mongodb.net/', { useNewUrlParser: true, useUnifiedTopology: true, dbName: "dhan-lakshmi" });
+mongoose.connect(process.env.MONGODB_URI, { 
+  useNewUrlParser: true, 
+  useUnifiedTopology: true, 
+  dbName: "dhan-lakshmi",
+  serverSelectionTimeoutMS: 5000
+}).catch(err => console.log('Error connecting to MongoDB:', err));
 
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once('open', function() {
+  console.log('Connected to MongoDB successfully');
+});
+
+app.get('/ping', (req, res) => {
+  res.send('pong')
+})
 
 function verifyToken(req, res, next) {
   const authHeader = req.headers.authorization;
