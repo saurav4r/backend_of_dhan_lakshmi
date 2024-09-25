@@ -8,7 +8,7 @@ const port = 3003;
 app.use(cors());
 app.use(express.json());
 
-const secretKey = "your-secret-key"; // Secret key for JWT token
+const secretKey = "your-secret-key"; 
 
 const userSchema = new mongoose.Schema({
   username: String,
@@ -64,7 +64,7 @@ app.post('/login', async (req, res) => {
   let { email, password } = req.body;
   const user = await USERS.findOne({ email, password });
 
-  if (user) {
+  if (user){ 
     const token = jwt.sign({ email, role: 'user' }, secretKey, { expiresIn: '1h' });
     res.status(200).json({ message: 'login-successful',token});
   } else {
@@ -75,8 +75,7 @@ app.post('/login', async (req, res) => {
 app.post('/from',verifyToken,async (req,res)=>{
     let {iamount,iinterest,icompound,itaken,igiven,itotal}=req.body;
     const newdata=new DATA({iamount,iinterest,icompound,itaken,igiven,itotal});
-    
-
+  
     await newdata.save();
     if(newdata.save()){
       console.log(iamount,iinterest,icompound,itaken,igiven,itotal)
